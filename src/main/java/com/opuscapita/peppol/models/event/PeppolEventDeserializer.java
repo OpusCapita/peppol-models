@@ -1,16 +1,14 @@
-package com.opuscapita.peppol.models.utils;
+package com.opuscapita.peppol.models.event;
 
 import com.google.gson.*;
-import com.opuscapita.peppol.commons.model.PeppolEvent;
 
 import java.lang.reflect.Type;
 
-public class PeppolEventDeSerializer implements JsonDeserializer<PeppolEvent> {
+public class PeppolEventDeserializer implements JsonDeserializer<PeppolEvent> {
 
     @Override
     public PeppolEvent deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        PeppolEvent result = fixSenderName(jsonElement);
-        return result;
+        return fixSenderName(jsonElement);
     }
 
     public PeppolEvent fixSenderName(JsonElement jsonElement) {

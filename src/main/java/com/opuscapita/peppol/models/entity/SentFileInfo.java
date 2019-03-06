@@ -1,6 +1,6 @@
 package com.opuscapita.peppol.models.entity;
 
-import com.opuscapita.peppol.models.utils.TimeStampComparison;
+import com.opuscapita.peppol.models.utils.TimeStampUtils;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -102,7 +102,7 @@ public class SentFileInfo implements Comparable<SentFileInfo> {
 
     @Override
     public int compareTo(SentFileInfo sentFileInfo) {
-        return TimeStampComparison.compare(this.getTimestamp(), sentFileInfo.getTimestamp());
+        return TimeStampUtils.compare(this.getTimestamp(), sentFileInfo.getTimestamp());
     }
 
     @Override

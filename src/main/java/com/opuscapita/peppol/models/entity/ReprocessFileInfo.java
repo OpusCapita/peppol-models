@@ -1,6 +1,6 @@
 package com.opuscapita.peppol.models.entity;
 
-import com.opuscapita.peppol.models.utils.TimeStampComparison;
+import com.opuscapita.peppol.models.utils.TimeStampUtils;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -47,6 +47,6 @@ public class ReprocessFileInfo implements Comparable<ReprocessFileInfo> {
 
     @Override
     public int compareTo(ReprocessFileInfo reprocessFileInfo) {
-        return TimeStampComparison.compare(this.getTimestamp(), reprocessFileInfo.getTimestamp());
+        return TimeStampUtils.compare(this.getTimestamp(), reprocessFileInfo.getTimestamp());
     }
 }

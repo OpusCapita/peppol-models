@@ -1,6 +1,6 @@
 package com.opuscapita.peppol.models.entity;
 
-import com.opuscapita.peppol.models.utils.TimeStampComparison;
+import com.opuscapita.peppol.models.utils.TimeStampUtils;
 import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
@@ -56,7 +56,7 @@ public class FileInfo implements Comparable<FileInfo> {
 
     @Override
     public int compareTo(FileInfo fileInfo) {
-        return TimeStampComparison.compare(this.getArrivedTimeStamp(), fileInfo.getArrivedTimeStamp());
+        return TimeStampUtils.compare(this.getArrivedTimeStamp(), fileInfo.getArrivedTimeStamp());
     }
 
     public Integer getId() {

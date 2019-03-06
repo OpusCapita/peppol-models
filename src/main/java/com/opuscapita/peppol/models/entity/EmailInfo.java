@@ -1,6 +1,6 @@
 package com.opuscapita.peppol.models.entity;
 
-import com.opuscapita.peppol.models.utils.TimeStampComparison;
+import com.opuscapita.peppol.models.utils.TimeStampUtils;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -29,7 +29,7 @@ public class EmailInfo implements Comparable<EmailInfo> {
 
     @Override
     public int compareTo(EmailInfo other) {
-        return TimeStampComparison.compare(this.getTimestamp(), other.getTimestamp());
+        return TimeStampUtils.compare(this.getTimestamp(), other.getTimestamp());
     }
 
     public Integer getId() {

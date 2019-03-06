@@ -2,7 +2,7 @@ package com.opuscapita.peppol.models.utils;
 
 import java.sql.Timestamp;
 
-public class TimeStampComparison {
+public class TimeStampUtils {
 
     public static int compare(Timestamp first, Timestamp second) {
         final int BEFORE = -1;

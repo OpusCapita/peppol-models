@@ -1,6 +1,6 @@
 package com.opuscapita.peppol.models.entity;
 
-import com.opuscapita.peppol.models.utils.TimeStampComparison;
+import com.opuscapita.peppol.models.utils.TimeStampUtils;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -80,6 +80,6 @@ public class FailedFileInfo implements Comparable<FailedFileInfo> {
 
     @Override
     public int compareTo(FailedFileInfo failedFileInfo) {
-        return TimeStampComparison.compare(this.getTimestamp(), failedFileInfo.getTimestamp());
+        return TimeStampUtils.compare(this.getTimestamp(), failedFileInfo.getTimestamp());
     }
 }
