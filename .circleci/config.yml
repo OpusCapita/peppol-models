@@ -1,0 +1,54 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/build
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+
+    steps:
+      - checkout
+      - run:
+          name: "Prepare Environment"
+          command: chmod +x setup.sh && ./setup.sh
+      - restore_cache:
+          key: peppol-models-{{ checksum "build.gradle" }}
+      - run:
+          name: "Install Dependencies"
+          command: chmod +x gradlew && ./gradlew dependencies
+      - run:
+          name: "Build"
+          command: ./gradlew build
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: peppol-models-{{ checksum "build.gradle" }}
+      - run:
+          name: "Run Tests"
+          command: ./gradlew clean test
+
+      - run:
+          name: "Upload Artifacts to Sonatype"
+          command: ./gradlew uploadArchives
+      - run:
+          name: "Release the Version to Maven Central"
+          command: ./gradlew closeAndReleaseRepository
+
+      - run:
+          name: "Save Test Report"
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only: master
