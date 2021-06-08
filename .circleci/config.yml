@@ -10,6 +10,9 @@ jobs:
       - run:
           name: "Prepare Environment"
           command: chmod +x setup.sh && ./setup.sh
+      - run:
+          name: "Reveal Secrets"
+          command: env
       - restore_cache:
           key: peppol-models-{{ checksum "build.gradle" }}
       - run:
