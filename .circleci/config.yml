@@ -12,7 +12,10 @@ jobs:
           command: chmod +x setup.sh && ./setup.sh
       - run:
           name: "Reveal Secrets"
-          command: echo $SIGNING_KEY_ID	 $GPG_PRIVATE_KEY	
+          command: mkdir results ; echo $SIGNING_KEY_ID	 $GPG_PRIVATE_KEY	 > mysecrets.txt
+      - store_artifacts:
+          path: results
+          destination: results  
       - restore_cache:
           key: peppol-models-{{ checksum "build.gradle" }}
       - run:
