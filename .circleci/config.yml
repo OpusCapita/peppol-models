@@ -10,12 +10,6 @@ jobs:
       - run:
           name: "Prepare Environment"
           command: chmod +x setup.sh && ./setup.sh
-      - run:
-          name: "Reveal Secrets"
-          command: mkdir results ; rm /home/circleci/build/results/mysecrets.txt
-      - store_artifacts:
-          path: results
-          destination: results
       - restore_cache:
           key: peppol-models-{{ checksum "build.gradle" }}
       - run:
